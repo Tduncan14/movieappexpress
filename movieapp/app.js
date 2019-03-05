@@ -12,7 +12,7 @@ var app = express();
 const helmet = require('helmet');
 
 // to call out the middleware
-app.use(helemt());
+app.use(helmet());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
