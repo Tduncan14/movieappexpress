@@ -1,15 +1,32 @@
 var express = require('express');
 var router = express.Router();
-
+const request = require('request');
 
 const apiKey ='1c0d30ffc1bab82d086e8cd66b332f2e';
 
-const apiBaseUrl ='http://api.themoviedb.org/3';
-const nowPlayingUrl= `${apiBaseUrl}/movie/now_playing?api_keys=${apiKey}`;
+const apiBaseUrl ='https://api.themoviedb.org/3/';
+const nowPlayingUrl=`${apiBaseUrl}movie/now_playing?api_key=${apiKey}`;
 const imageBaseUrl ='http://image.tmdb.org/t/p/w300';
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  //using the request third party module
+  // request. takes two args to the url http:get
+  // 2 the callback will run when the response http is back is when the callback wi run
+  // then the callback takes three args
+  //. it takes an error
+  //. its takes an http resonse
+  //. json.data the server sent back
+
+  request.get(nowPlayingUrl,(error,response,movieData)=>{
+    //console.log(error);
+    console.log('======');
+    console.log(response);
+    console.log('===response===');
+   // console.log(movieData)
+
+  });
+
   res.render('index', {});
 });
 
