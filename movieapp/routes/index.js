@@ -39,5 +39,16 @@ router.get('/', function(req, res, next) {
   });
 
 });
+// /movie/:id/is a wildcard route
+// that means the colon id going to be stored in :id...
+//
+router.get('/movie/:id',(req,res,next) =>{
+  //res.json(req.params.id);
+
+  const movieId = req.params.id;
+  const thisMovieUrl = `${apiBaseUrl}movie/${movieId}?api_key=${apiKey}`
+
+  res.send(thisMovieUrl);
+})
 
 module.exports = router;
