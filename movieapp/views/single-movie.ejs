@@ -1,7 +1,6 @@
 <% include head %>
 </head>
 <body>
-	<% include navbar %>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
@@ -14,7 +13,7 @@
 				</h3>
 				
 
-				<a href=""><img src="<%= imageBaseUrl + parsedData.poster_path %>" /></a>
+				<a href="<%= parsedData.homepage %>"><img src="<%= imageBaseUrl+parsedData.poster_path %>" /></a>
 				
 				<p class="">Movie Synopsis: <span class="">
 					<%=parsedData.overview%>
@@ -39,10 +38,11 @@
         <h4 class="modal-title" id="myModalLabel">Movie Information</h4>
       </div>
       <div class="modal-body">
-				<a href="">IMDB link</a>
-				<p></p>
-				<p></p>
-				<p></p>
+				<a href="https://www.imdb.com/title/<%=parsedData.imdb_id%>" target="_blank">IMDB link</a>
+				<p>Budget:<%=parsedData.budget%></p>
+				<p>Rating:<%=parsedData.vote_average%>/10</p>
+				<p>Release Date:<%=parsedData.release_data%></p>
+				<p>Production Company: <%=parsedData.production_companies[0].name %></p>
 				<ul>
 				
 				
