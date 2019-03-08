@@ -3,8 +3,10 @@ var router = express.Router();
 const request = require('request');
 
 const apiKey ='1c0d30ffc1bab82d086e8cd66b332f2e';
-
+//const apiKey='123456789'
 const apiBaseUrl ='https://api.themoviedb.org/3/';
+
+//const apiBaseUrl="http://localhost:3030";
 const nowPlayingUrl=`${apiBaseUrl}movie/now_playing?api_key=${apiKey}`;
 const imageBaseUrl ='http://image.tmdb.org/t/p/w300';
 
@@ -55,6 +57,37 @@ router.get('/movie/:id',(req,res,next) =>{
     res.render('single-movie',{parsedData:parsedData})
 
   })
+})
+
+router.post("/search",(req,res,next) =>{
+  //res.send("sanity check");
+  const userSearchTerm = encodeURI(req.body.movieSearch);
+  const cat = req.body.cat;
+
+  const movieUrl =`${apiBaseUrl}search/${cat}?query=${userSearchTerm}&api_key=${apiKey}`
+
+ //res.send(movieUrl);
+
+ request.get(movieUrl,(error,response,movieData)=>{
+  
+  let parsedData = JSON.parse(movieData);
+ // res.json(parseData);
+
+ if(cat ==="person"){
+
+  parsedData.results = parsedData.results[0].known_for;
+ }
+
+
+
+ res.render('index',{
+   parsedData:parsedData.results
+ })
+
+ })
+   
+  
+
 })
 
 module.exports = router;
